@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script type="text/javascript" src="https://faye.auctionaccelerate.com/faye/client.js">
+  </script>
+  <script type="text/javascript">
+    var client = new Faye.Client('https://faye.auctionaccelerate.com/faye/');
+    const updateVehicle = (vehicleMessage)=>{
+      console.log(vehicleMessage)
+      document.getElementById('vehicle-data').innerHTML = JSON.stringify(vehicleMessage)
+    }
+    client.on('transport:up', () => console.log('Faye client is up'))
+
+    client.subscribe('/gaa/broadcast-data/QSOcmbZFvg', updateVehicle)
+  </script>
+</head>
+<body>
+  <div id="vehicle-data">
+
+  </div>
+</body>
+</html>
